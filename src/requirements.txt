@@ -1,0 +1,15 @@
+langchain
+langchain-openai
+langchain-community
+langchain-core
+tiktoken
+pydantic
+python-dotenv
+markdownify
+PyPDF2
+docx2txt
+typing-extensions
+fastapi
+uvicorn[standard]
+gradio
+requests
