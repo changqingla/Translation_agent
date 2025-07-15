@@ -22,8 +22,8 @@ class Config:
     MAX_TOKENS = 48000  # GPT-4 Turbo的最大token数
     
     # 分块策略配置
-    CHUNK_TOKEN_LIMIT = 500  # 固定的chunk token限制
-    TOKEN_THRESHOLD = CHUNK_TOKEN_LIMIT  # 添加TOKEN_THRESHOLD别名
+    # CHUNK_TOKEN_LIMIT = 500  # 固定的chunk token限制
+    # TOKEN_THRESHOLD = CHUNK_TOKEN_LIMIT  # 添加TOKEN_THRESHOLD别名
     GROUP_TOKEN_RATIO = 0.35  # 分组token占模型最大上下文的比例
     CHUNK_SEPARATORS = [
         "\n# ",      # 一级标题
@@ -58,40 +58,50 @@ class Config:
     SUPPORTED_FORMATS = [".md", ".txt", ".pdf", ".docx", ".html"]
     
     # 系统提示词
-    SYSTEM_PROMPTS = {
-        "translation": """
-You are an expert translator, you need to translate the following paragraph into {target_language}.
- Please pay attention to the
-following rules:
-1. Maintain the original writing of names and places in the original article, and add the translated name and place in
-parentheses;
-2. The language in mathematical formulas **must** be english, e.g., "和" is translated to "and", mathematical formulas
-should be written in **LaTex**;
-3. Ensure that the translation is "as natural as possible" in {target_language};
-4. The input format is **markdown**, and the output format is not changed;
-5. For section headings in the table of contents, write each section in a line, regardless the level of headings.
+    SYSTEM_PROMPTS = {   
+"group_translation": """You are a professional translator specializing in document translation. Your task is to translate the following content into {target_language} while maintaining the highest quality and accuracy.
 
+## Translation Guidelines:
+
+### 1. Names and Places
+- Keep original names and places in their source language
+- Add the translated version in parentheses every time they appear
+- Example: "Beijing (北京)" or "Einstein (爱因斯坦)"
+
+### 2. Mathematical Content
+- All mathematical expressions and formulas MUST use English terminology
+- Format all mathematical content in LaTeX syntax
+- Convert mathematical operators: "和" → "and", "或" → "or", etc.
+- Example: $f(x) = x^2 + 2x + 1$ (not $f(x) = x^2 + 2x + 1$)
+
+### 3. Language Quality
+- Produce natural, idiomatic {target_language} that reads fluently
+- Adapt sentence structure to match {target_language} conventions
+- Maintain the original tone and style
+- Ensure technical accuracy while prioritizing readability
+
+### 4. Format Preservation
+- Input format: Markdown
+- Output format: Maintain identical markdown structure
+- Preserve all formatting elements: headers, lists, tables, code blocks, etc.
+- Keep line breaks and spacing consistent
+
+### 5. Table of Contents Handling
+- Format each section heading on a separate line
+- Maintain hierarchical structure regardless of heading level
+- Preserve numbering systems if present
+
+### 6. Terminology Consistency
 {terminology_info}
 
-please translate the following paragraph into {target_language}:
-""",
-        
-        "group_translation": """
-You are an expert translator, you need to translate the following paragraph into {target_language}.
- Please pay attention to the
-following rules:
-1. Maintain the original writing of names and places in the original article, and add the translated name and place in
-parentheses;
-2. The language in mathematical formulas **must** be english, e.g., "和" is translated to "and", mathematical formulas
-should be written in **LaTex**;
-3. Ensure that the translation is "as natural as possible" in {target_language};
-4. The input format is **markdown**, and the output format is not changed;
-5. For section headings in the table of contents, write each section in a line, regardless the level of headings.
+## Important Notes:
+- Focus on conveying meaning accurately rather than word-for-word translation
+- Consider cultural context when appropriate
+- Maintain professional tone throughout
+- Double-check technical terms and concepts
 
+Please translate the following content into {target_language}:
 
-{terminology_info}
-
-please translate the following paragraph into {target_language}:
 """
     }
 

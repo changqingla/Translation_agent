@@ -18,9 +18,9 @@ from utils.logger import init_logger
 # 初始化
 init_logger(debug_mode=True)
 app = FastAPI(
-    title="智能翻译 Agent API",
+    title="文档翻译 Agent API",
     description="提供异步翻译任务处理的API服务。",
-    version="2.0.0"
+    version="1.0.0"
 )
 translation_service = TranslationService()
 task_manager = TaskManager()
